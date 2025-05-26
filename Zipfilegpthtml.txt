@@ -1,0 +1,111 @@
+from zipfile import ZipFile
+import os
+
+# Define HTML files for the website
+files = {
+    "index.html": """<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hyundai Earning</title>
+</head>
+<body>
+  <h1>Welcome to Hyundai Earning</h1>
+  <a href="signup.html">Sign Up</a> | <a href="login.html">Login</a>
+</body>
+</html>""",
+
+    "signup.html": """<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up - Hyundai Earning</title>
+</head>
+<body>
+  <h2>Sign Up</h2>
+  <form>
+    <input type="text" placeholder="Username"><br>
+    <input type="email" placeholder="Email"><br>
+    <input type="password" placeholder="Password"><br>
+    <button>Sign Up</button>
+  </form>
+</body>
+</html>""",
+
+    "login.html": """<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - Hyundai Earning</title>
+</head>
+<body>
+  <h2>Login</h2>
+  <form>
+    <input type="email" placeholder="Email"><br>
+    <input type="password" placeholder="Password"><br>
+    <button>Login</button>
+  </form>
+</body>
+</html>""",
+
+    "dashboard.html": """<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard - Hyundai Earning</title>
+</head>
+<body>
+  <h2>Dashboard</h2>
+  <ul>
+    <li><a href="deposit.html">Deposit</a></li>
+    <li><a href="withdraw.html">Withdraw</a></li>
+    <li><a href="profile.html">Profile</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="terms.html">Terms</a></li>
+    <li><a href="refer.html">Refer</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</body>
+</html>""",
+
+    "deposit.html": "<html><body><h2>Deposit Page</h2></body></html>",
+    "withdraw.html": "<html><body><h2>Withdraw Page</h2></body></html>",
+    "profile.html": "<html><body><h2>Profile Page</h2></body></html>",
+    "faq.html": "<html><body><h2>FAQ Page</h2></body></html>",
+    "terms.html": "<html><body><h2>Terms & Conditions</h2></body></html>",
+    "refer.html": "<html><body><h2>Refer & Earn</h2></body></html>",
+    "about.html": "<html><body><h2>About Hyundai Earning</h2></body></html>",
+    "contact.html": """<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Us - Hyundai Earning</title>
+</head>
+<body>
+  <h2>Contact Us</h2>
+  <form>
+    <input type="text" placeholder="Your Name"><br>
+    <input type="email" placeholder="Your Email"><br>
+    <textarea placeholder="Your Message"></textarea><br>
+    <button>Send</button>
+  </form>
+</body>
+</html>"""
+}
+
+# Create the HTML files and save them
+folder_path = "/mnt/data/hyundai_earning_site"
+os.makedirs(folder_path, exist_ok=True)
+
+for filename, content in files.items():
+    with open(os.path.join(folder_path, filename), "w") as f:
+        f.write(content)
+
+# Create a zip file
+zip_path = "/mnt/data/hyundai_earning_site.zip"
+with ZipFile(zip_path, "w") as zipf:
+    for filename in files:
+        zipf.write(os.path.join(folder_path, filename), arcname=filename)
+
+zip_path
